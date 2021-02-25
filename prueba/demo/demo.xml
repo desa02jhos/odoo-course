@@ -1,0 +1,13 @@
+<odoo>
+          <record id="clients0" model="prueba.course">
+            <field name="name">Client0</field>
+            <field name="Description">Description</field>
+          </record>    
+          <record id="clients1" model="prueba.course">
+            <field name="name">Client1</field>
+          </record>
+          <record id="clients2" model="prueba.course">
+            <field name="name">Client2</field>
+            <field name="Description">Maria Patricia</field>
+          </record>
+</odoo>

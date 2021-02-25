@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--Mostrando  cambios en el vista de crear productos -->
+	<record model="ir.ui.view" id="vista_listado_producto">
+		<field name="name">producto_custom</field>
+		<field name="model">product.template</field>
+		<field name="inherit_id" ref="product.product_template_only_form_view"/>
+		<field name="arch" type="xml">
+			<field name="default_code" position="after">
+				<field name="product_info" />
+				<field name="description" string="Describelo"/>
+			</field>
+		</field>
+	</record>
+<!--Mostrando  cambios en el vista Trasnferencia - Inventario -->
+	<record model="ir.ui.view" id="vista_listado_transferencia">
+		<field name="name">producto_transf</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+			<field name="scheduled_date" position="after">
+				<field name="venta_info" />
+				<field name="resena" string="Describelo"/>
+			</field>
+		</field>
+	</record>
+
+    
+</odoo>

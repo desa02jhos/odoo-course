@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="customer_view_tree" model="ir.ui.view">
+        <field name="name">Vista de Cliente</field>
+        <field name="model">cliente.prueba</field>
+        <field name="arch" type="xml">
+            <tree>
+            <!-- Muestra en pantalla solo nombres -->
+                <field name="namecomplete" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="cliente_view_form" model="ir.ui.view">
+        <field name="name">cliente.view.form</field>
+        <field name="model">cliente.prueba</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <!-- <field name="customerdocument_ids" /> -->
+                <!-- <sheet>
+                    <div class="oe_button_box" name="button_box">
+                       <button name="action_subscribe" type="object" class="oe_stat_button" icon="fa-bell">
+                            <field name="subscribe" widget="boolean_button" options="{'terminology' : {
+                              'string_true' : 'Suscrito',
+                              'string_false': 'Desuscrito',
+                              'hover_true':  'Desuscribirse',
+                              'hover_false': 'Suscribirse' 
+                                }
+                            }"/>
+                        </button> 
+                         <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                </sheet> -->
+                <sheet>
+                    <!-- Alerta de llenado de datos -->
+                    <div class="alert alert-warning" role="alert" style="margin-bottom:0px;" attrs="{ 'invisible': [('id','!=',False)] }">
+                        Ingrese los datos a registrar, Es importante que escriba claramente el <strong>Nombre y Correo.</strong>
+                    </div>
+                    <separator/>
+                    <!-- Titulo -->
+                    <div class="oe_title">
+                    <!-- Seleccion del Tipo de Persona -->
+                        <field name="c_customer_type" widget='radio' options="{'horizontal': true}" attrs="{'invisible': [('id','!=', False)]}" readonly="context.get('radio')"/>
+                        <h1>
+                    <!-- Activar name, invisible="1" attrs="{'required' : [('c_customer_type', '=', 'contact')]}" -->
+                            <field name="name" invisible="1"/>
+                    <!-- Muestra los nombres completos de forma dinamica -->
+                            <field name="namecomplete" invisible="False" class="oe_inline" style="text-transform:uppercase"/>
+                        </h1>
+                    </div>
+                    <!-- Llenado de datos, manual -->
+                    <group string="Datos del Cliente" attrs="{'invisible': [('c_customer_type', '=', '1')]}">
+                        <field name="c_lastname" attrs="{'invisible': [('c_customer_type', '=', '1')]}" style="text-transform:uppercase"/>
+                        <field name="c_motherlastname" attrs="{'invisible' : [('c_customer_type','=','1')]}" style="text-transform:uppercase"/>
+                        <field name="c_firstname" attrs="{'invisible' : [('c_customer_type','=','1')]}" style="text-transform:uppercase"/>
+                    </group>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Disparo de Interfaz -->
+
+    <record id="cliente" model="ir.actions.act_window">
+        <field name="name">Cliente</field>
+        <field name="res_model">cliente.prueba</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Ingrese los Clientes a crear</p>
+        </field>
+    </record>
+
+    <menuitem id="clientes_opt" name="Clientes" parent="main_prueba_menu" />
+    <menuitem id="cliente_prueba_opt" name="Cliente" parent="clientes_opt" action="cliente" />
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- cfs.customer.documents tree view -->
+    <record id="customer_document_view_tree" model="ir.ui.view">
+        <field name="name">cfs.customer.document.view.tree</field>
+        <field name="model">cfs.customer.document</field>
+        <field name="arch" type="xml">
+            <tree edit="false">
+                <!-- <field name="customer_id"/> -->
+                <field name="c_idnumber"/>
+                <field name="documentcatalog_ids"/>
+                <field name="date_expiration"/>
+                <field name="t_remark"/>
+                <field name="active" widget="boolean_toggle"/>
+                
+            </tree>
+        </field>
+    </record>
+
+    <!-- cfs.customer.document form view -->
+    <record id="customer_document_view_form" model="ir.ui.view">
+        <field name="name">Documentos cliente</field>
+        <field name="model">cfs.customer.document</field>
+        <field name="arch" type="xml">
+            <form string="" create="false" edit="false" version="7.0">
+                <sheet>
+                    <div class="col-sm-12">
+                        <div class="row" style="border: 1px solid #2a4a8c;">
+                            <div class="col-sm-9">
+                                <p style="text-align:left; color:#2a4a8c; font-size: 2.1em">
+                                    <strong><img src='data_precharge/static/src/img/client_doc.png' width="35" height="35"/>   Formulario de Documentos del Cliente </strong>
+                                </p>
+                            </div>
+                            <div class="col-sm-3">
+                                <p style="text-align:right; color:#2a4a8c; font-size: 1.2em">
+                                    Fecha: <field name="write_date" readonly="True" widget='date' style="text-align:right;"/>
+                                </p>
+                            </div>                            
+                        </div>
+                         <br/> 
+                    </div>
+                        <group name="group_top">
+                            <group name="group_left">
+                                <!-- <field name="customer_id" domain="[('id','=',parent.id)]" options="{'no_create': True, 'no_open': True}"/> -->
+                                <field name="c_idnumber"/>
+                                <field name="documentcatalog_ids" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="date_expiration"/>
+                                <field name="t_remark"/>
+                                <field name="active" widget="boolean_toggle"/>
+                            </group>
+                            <group name="group_right">
+                                <label for="bi_imagendocument" string="Imagen"></label>
+                                <!-- <field name="bi_imagendocument_name" invisible="1" nolabel="1"/> -->
+                                <!-- <field name="bi_imagendocument" widget="binary" filename="bi_imagendocument_name"/> -->
+
+                            </group>
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- cfs.customer.document action window -->
+    <record id="customer_document_list_action" model="ir.actions.act_window">
+        <field name="name">Documentos de identidad asociados al cliente</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cfs.customer.document</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                    Agregue un nuevo documento del cliente aqui
+            </p>
+        </field>
+    </record>
+</odoo>
